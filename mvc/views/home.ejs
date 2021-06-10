@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인페이지</title>
+    <!-- <script src="/jquery-3.6.0.min.js"></script>
+    <script src="/semantic.min.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="/semantic.min.css">
+    <style>
+        .list-container,
+        .form {
+            margin: 20px auto;
+            padding: 20px;
+            width: 1200px;
+            background-color: #edf5f4;
+        }
+    </style>
+</head>
+<body>
+    <form class="ui form" action="/add" method="POST">
+        <div class="three fields">
+          <div class="field">
+            <label>Name</label>
+            <input name="name" type="text" placeholder="이름">
+          </div>
+          <div class="field">
+            <label>Movie</label>
+            <input name="movie" type="text" placeholder="영화">
+          </div>
+          <div class="field">
+            <label>When</label>
+            <input name="when" type="text" placeholder="시기">
+          </div>
+        </div>
+        <button type="submit" class="ui green button">Submit</button>
+        <button type="button" class="ui red button">Press</button>
+    </form>
+
+    <div class="list-container">
+        <div class="ui list">
+            <% list.forEach(function(data) { %>
+            <div class="item">
+                <img class="ui avatar image" src="<%=data.img%>">
+                <div class="content">
+                    <a href="/detail/<%=data.index%>" class="header"><%=data.name%></a>
+                    <div class="description">Last seen watching <a><b><%=data.programme%></b></a> just now.</div>
+                </div>    
+            </div>
+            <% }) %>
+        </div>
+    </div>
+
+</body>
+</html>
