@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메인페이지</title>
-    <!-- <script src="/jquery-3.6.0.min.js"></script>
-    <script src="/semantic.min.js"></script> -->
+    <script src="/jquery-3.6.0.min.js"></script>
+    <script src="/semantic.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/semantic.min.css">
     <style>
         .list-container,
@@ -19,38 +19,52 @@
     </style>
 </head>
 <body>
-    <form class="ui form" action="/add" method="POST">
+    <form class="ui form" action="/create/new" method="POST">
         <div class="three fields">
           <div class="field">
-            <label>Name</label>
-            <input name="name" type="text" placeholder="이름">
+            <label>이름</label>
+            <input name="hr_name" type="text" placeholder="이름">
           </div>
           <div class="field">
-            <label>Movie</label>
-            <input name="movie" type="text" placeholder="영화">
+            <label>소속부서</label>
+            <!-- <input name="movie" type="text" placeholder="소속부서"> -->
+            <select class="ui dropdown" name="hr_department">
+                <option value="">부서 선택</option>
+                <% department.forEach(function(item){ %>   
+                    <option value="<%=item.department_idx%>"><%=item.department_name%></option>
+                <% }) %>
+            </select>
           </div>
           <div class="field">
-            <label>When</label>
-            <input name="when" type="text" placeholder="시기">
+            <label>직급</label>
+            <!-- <input name="when" type="text" placeholder="직급"> -->
+            <select class="ui dropdown" name="hr_position">
+                <option value="">부서 선택</option>
+                <% position.forEach(function(item){ %>   
+                    <option value="<%=item.position_idx%>"><%=item.position_name%></option>
+                <% }) %>
+            </select>
           </div>
         </div>
-        <button type="submit" class="ui green button">Submit</button>
-        <button type="button" class="ui red button">Press</button>
+        <button type="submit" class="ui blue button">Submit</button>
     </form>
 
     <div class="list-container">
         <div class="ui list">
             <% list.forEach(function(data) { %>
             <div class="item">
-                <img class="ui avatar image" src="<%=data.img%>">
+                <img class="ui avatar image" src="<%=data.image%>" onerror="this.src='/images/default.png'">
                 <div class="content">
-                    <a href="/detail/<%=data.index%>" class="header"><%=data.name%></a>
-                    <div class="description">Last seen watching <a><b><%=data.programme%></b></a> just now.</div>
+                    <a href="/detail/<%=data.hr_idx%>" class="header"><%=data.hr_name%></a>
+                    <div class="description"><%=data.hr_name%>님은 <a><b><%=data.department_name%></b></a>의 <%=data.position_name%>입니다.</div>
                 </div>    
             </div>
             <% }) %>
         </div>
     </div>
+    <script>
+        $('.ui.dropdown').dropdown();
+    </script>
 
 </body>
 </html>

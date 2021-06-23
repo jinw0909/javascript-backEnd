@@ -17,13 +17,16 @@ const Router = function (app) {
         MainController.mainView(req, res);
     });
 
-    app.get('');
-
     app.post('/add', function(req, res) {
         MainController.addUser(req, res);
     });
     
+    app.post('/create/new', function(req,res){
+        MainController.createNewUser(req,res);
+    });
+    
     const DetailController = require('./controllers/DetailController');
+    console.log(DetailController);
     // localhost:3002/detail
     app.get('/detail/:index', function(req, res) {
         DetailController.detailView(req, res);
